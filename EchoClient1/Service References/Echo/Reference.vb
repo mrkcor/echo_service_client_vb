@@ -22,6 +22,11 @@ Namespace Echo
         <System.ServiceModel.OperationContractAttribute(Action:="http://www.without-brains.net/echo_service#Echo", ReplyAction:="*"),  _
          System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults:=true)>  _
         Function Echo(ByVal request As Echo.EchoRequest) As Echo.EchoResponse
+        
+        'CODEGEN: Generating message contract since the operation ReverseEcho is neither RPC nor document wrapped.
+        <System.ServiceModel.OperationContractAttribute(Action:="http://www.without-brains.net/echo_service#ReverseEcho", ReplyAction:="*"),  _
+         System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults:=true)>  _
+        Function ReverseEcho(ByVal request As Echo.ReverseEchoRequest) As Echo.ReverseEchoResponse
     End Interface
     
     '''<remarks/>
@@ -96,6 +101,44 @@ Namespace Echo
         End Sub
     End Class
     
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
+     System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
+     System.ServiceModel.MessageContractAttribute(IsWrapped:=false)>  _
+    Partial Public Class ReverseEchoRequest
+        
+        <System.ServiceModel.MessageBodyMemberAttribute(Name:="ReverseEchoRequest", [Namespace]:="http://www.without-brains.net/echo", Order:=0)>  _
+        Public ReverseEchoRequest1 As Echo.EchoMessageType
+        
+        Public Sub New()
+            MyBase.New
+        End Sub
+        
+        Public Sub New(ByVal ReverseEchoRequest1 As Echo.EchoMessageType)
+            MyBase.New
+            Me.ReverseEchoRequest1 = ReverseEchoRequest1
+        End Sub
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
+     System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
+     System.ServiceModel.MessageContractAttribute(IsWrapped:=false)>  _
+    Partial Public Class ReverseEchoResponse
+        
+        <System.ServiceModel.MessageBodyMemberAttribute(Name:="ReverseEchoResponse", [Namespace]:="http://www.without-brains.net/echo", Order:=0)>  _
+        Public ReverseEchoResponse1 As Echo.EchoMessageType
+        
+        Public Sub New()
+            MyBase.New
+        End Sub
+        
+        Public Sub New(ByVal ReverseEchoResponse1 As Echo.EchoMessageType)
+            MyBase.New
+            Me.ReverseEchoResponse1 = ReverseEchoResponse1
+        End Sub
+    End Class
+    
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
     Public Interface EchoPortTypeChannel
         Inherits Echo.EchoPortType, System.ServiceModel.IClientChannel
@@ -137,6 +180,18 @@ Namespace Echo
             inValue.EchoRequest1 = EchoRequest1
             Dim retVal As Echo.EchoResponse = CType(Me,Echo.EchoPortType).Echo(inValue)
             Return retVal.EchoResponse1
+        End Function
+        
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Function Echo_EchoPortType_ReverseEcho(ByVal request As Echo.ReverseEchoRequest) As Echo.ReverseEchoResponse Implements Echo.EchoPortType.ReverseEcho
+            Return MyBase.Channel.ReverseEcho(request)
+        End Function
+        
+        Public Function ReverseEcho(ByVal ReverseEchoRequest1 As Echo.EchoMessageType) As Echo.EchoMessageType
+            Dim inValue As Echo.ReverseEchoRequest = New Echo.ReverseEchoRequest()
+            inValue.ReverseEchoRequest1 = ReverseEchoRequest1
+            Dim retVal As Echo.ReverseEchoResponse = CType(Me,Echo.EchoPortType).ReverseEcho(inValue)
+            Return retVal.ReverseEchoResponse1
         End Function
     End Class
 End Namespace

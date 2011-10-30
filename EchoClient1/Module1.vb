@@ -7,14 +7,29 @@
 
     Sub Main()
         message = Command()
+
         If message = "" Then
             message = "Hello from VisualBasic"
         End If
+
         client = New Echo.EchoPortTypeClient()
+
         request = New Echo.EchoMessageType()
         request.Message = message
-        response = client.Echo(request)
-        Console.WriteLine(response.Message)
+
+        Try
+            response = client.Echo(request)
+            Console.WriteLine("EchoService responded to Echo: " + response.Message)
+        Catch sf As System.ServiceModel.FaultException
+            Console.WriteLine("SOAP fault: " + sf.Message)
+        End Try
+
+        Try
+            response = client.ReverseEcho(request)
+            Console.WriteLine("EchoService responded to ReverseEcho: " + response.Message)
+        Catch sf As System.ServiceModel.FaultException
+            Console.WriteLine("SOAP fault: " + sf.Message)
+        End Try
     End Sub
 
 End Module
